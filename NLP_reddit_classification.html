@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Predicting New York Times Cooking Recipe Popularity</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h2>Predicting New York Times Cooking Recipe Popularity</h2>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>Predicting New York Times Cooking Recipe Popularity</h2>
+								<p>Below is a summary of my project to classify NYT Cooking recipes and determine what features make a recipe more popular than others.
+									More detailed information, including code and further analysis, can be found on my <a href="https://github.com/jserigano4/NYT_cooking_recipe_popularity">Github</a> and slide for a presentation on this project can be found <a href="https://github.com/jserigano4/NYT_cooking_recipe_popularity/blob/main/NYT_cooking_Serigano.pdf">here</a>.</p>
+								<h2>Introduction</h2>
+								<p><a href="https://cooking.nytimes.com/">NYT Cooking</a> is a subscription service and digital source for 20,000+ recipes from The New York Times. The site also includes how-to guides for home cooks of every level, weekly cooking newsletters, and recipe suggestions. Subscribers also have access to a recipe box where they can store their favorite recipes for future use. Recipes on the site include many common recipe features as well as links to related content and keywords that lead one to similar recipes. The website also has a 5 star rating system and the ability for users to leave comments related to their experience with the recipes.</p>
+								<p>In the digital age, online traffic and engagement are huge metrics of success for a website. This can be monitored in a number of different ways, including via total number of recipe ratings. Since NYT Cooking is a paid subscription service, the retention of existing, loyal subscribers and acquisition of new subscribers is key. This can only be accomplished by creating engaging content for users.</p>
+								<p>In order for NYT Cooking to continue their growing platform and ongoing success, they must maintain and increase overall site traffic and continue to attract new users. <b>This project aims to:</p>
+								<ul>
+									<li>Determine how NYT Cooking can improve their recipe popularity and overall site traffic through web scraping of open access recipe data.</li>
+									<li>Determine what characteristics of a recipe are most likely to increase the overall popularity, and thus lead to higher site traffic.</li>
+									<li>Recommend changes that can be made to a recipe before posting.</li></ul></b>
+								</ul>
+								<p>In order to answer these questions, we'll build a classification model to predict whether a recipe will create higher than average site traffic based on several recipe features. We will use number of ratings as a proxy for popularity and site traffic.</p>
+								<h2>Executive Summary</h2>
+								<p>After generating 10,000 individual NYT Cooking URLs, recipe data was collected using the <a href="https://github.com/hhursev/recipe-scrapers">recipe_scrapers</a> web scraping tool found on Github. After data cleaning and preprocessing, 7,627 recipes were left for analysis. The data collected from each recipe and used in the classification model include:
+									Title of recipe, 
+									Author of recipe, 
+									Date of posting, 
+									Recipe description, 
+									Total time for recipe, 
+									Recipe yield, 
+									Number of steps, 
+									Text for all steps, 
+									Number of ingredients,  
+									Number of ratings for recipe, 
+									Recipe tags (keywords for main ingredients in each recipe), 
+									Cuisine type, 
+									Recipe categories (e.g., breakfast, lunch, dinner), and 
+									Recipe ratings.
+								</p>
+								<p>These features were used to predict whether a recipe would be more popular, and thus produce more site traffic, than other recipes. A popular recipe is defined as a recipe with a rating count greater than the median number of ratings. Median was used in this case, as opposed to mean, because there are clearly outliers in our data and the target variable of number of ratings is heavily skewed. Outliers are important here, so we don't want to get rid of them.</p>
+								<span class="image"><img src="images/rating_count_median_hist.png" alt="" /></span>
+								<p>The goal is to build a classification model to accurately predict whether or not a recipe is considered highly trafficked, and from this determine which features are the most important to recipe popularity. In total, 109 tags were used as features in our model. These included all tags that appeared in more than 15 recipes. Categorical features such as breakfast, lunch, dinner, quick, easy, etc. were also used as one-hot encoded model features.</p>
+								<p>Multiple classification models were developed with hyperparameter tuning in order to determine which classifier produced the most accurate model predictions. The classifiers included: LogisticRegression()
+									KNeighborsClassifier(), 
+									RandomForestClassifier(), 
+									AdaBoostClassifier(), 
+									GradientBoostingClassifier(), and
+									XGBoost.</p>
+								<p>A stacked model of the best performing models was also created. In the end, the best performing model was the GradientBoostingClassifier() which achieved an accuracy of 0.79 and a test data set ROC-AUC score of 0.86.</p>
+								<h2>Conclusion and Recommendations</h2>
+								<p>A benefit of the GradientBoostingClassifier() model performing the best is that it is straightforward to retrieve the importance of each feature in our model.
+								The values below indicate how useful a particular feature is to making key decisions in the modeling process. A higher value indicates a more valuable feature within the model.
+									Based on model performance, the top 25 most important general features and top 25 most important tags are listed below:</p>
+									<span class="image"><img src="images/most_imp_features.png" alt="" /></span>
+									<span class="image"><img src="images/most_imp_tags.png" alt="" /></span>
+								<ul>
+									<li>Rating itself is highly correlated to the number of ratings a recipe receives, meaning people are more likely to interact with a recipe they really enjoyed.</li>
+									<li>Generally, wordier recipes tend to perform better and have a higher number of reviews, perhaps because these recipes include more detailed information and lead to better results.</li>
+									<li>Comfort foods such as desserts and pastas perform better than other recipes and lead to more site traffic.</li>
+									<li>Some authors have very dedicated followers. Melissa Clark (the "Queen of NYT Cooking"), David Tanis, and Alison Roman always produce very popular recipes.</li>
+									<li>Subscribers enjoy christmas recipes, which isn't a surprise since NYT Cooking is known for their christmas cookie recipes.</li>
+									<li>Recipes including the ingredients butter, chickpeas, almonds, and chicken produce higher than average site traffic.</li>
+									<li>Dairy-free recipes or recipes including celery, cinnamon, and fennel have a negative correlation to rating count and do not typically perform well.</li>
+								</ul>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<ul class="icons">
+								<li><a href="https://www.linkedin.com/in/joseph-serigano/" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://github.com/jserigano4" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy; 2022 Joseph Serigano. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
