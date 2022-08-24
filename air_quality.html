@@ -45,13 +45,13 @@
 							<section id="content" class="main">
 								<h2>Combatting Air Pollution and Inequality in the US</h2>
 								<p>The project described below was a group project completed with two peers. As the only member of the group with experience in atmospheric modeling, I led the group and speerheaded data collection, cleaning, extraction, and interpretation of modeling results.
-									More detailed information, including code and further analysis, can be found on my <a href="https://github.com/jserigano4/Air-Quality-in-the-USA">Github</a> and slides for a presentation on this project can be found <a href="https://github.com/jserigano4/Air-Quality-in-the-USA/blob/main/Group%201%20-%20Air%20Quality%20Monitoring%20-%20DSI%20523-1.pdf">here</a>.</p>
+									More detailed information, including code and further analysis, can be found on my <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA">Github</a></span> and slides for a presentation on this project can be found <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA/blob/main/Group%201%20-%20Air%20Quality%20Monitoring%20-%20DSI%20523-1.pdf">here</a></span>.</p>
 								<h2>Introduction</h2>
 								<p>Air quality is highly variable in the US and disproportionately affects communities of color. Particulate matter in the atmosphere with a diameter less than 2.5 microns, known as PM2.5, is typically used as a proxy for 
 									general air quality. PM2.5 is the leading environmental contributor to the global burden of disease. Particles in this size range are so dangerous because they are able to travel deeply into the respiratory tract, reaching 
 									the lungs and affecting lung function as well as exacerbating pre-existing conditions.</p>
 
-								<p>House members introduced a $500 million air quality bill to place new air quality sensors in communities overburdened with pollution. More information about this bill can be found in this <a href="https://www.propublica.org/article/representatives-introduce-500-million-air-quality-bill-citing-propublicas-investigations">article</a> from ProPublica. 
+								<p>House members introduced a $500 million air quality bill to place new air quality sensors in communities overburdened with pollution. More information about this bill can be found in this <span style="background-color: #70C7AA"><a href="https://www.propublica.org/article/representatives-introduce-500-million-air-quality-bill-citing-propublicas-investigations">article</a></span> from ProPublica. 
 									This bill would award grants or contracts to state, local, and tribal agencies to install new air quality monitoring systems around communities afflicted by poor air quality. The EPA does not explicitly state where 
 									these monitors should be located and instead delegates the placement of these monitors to the agencies. <b>The goal of this project is to create a model that accurately estimates ground PM2.5 air quality measurements at 
 									current EPA monitoring sites using publicly available satellite data. We will then use this model to determine regions in the US that suffer from poor air quality, noted by highly variable PM2.5 predictions in the region 
@@ -63,7 +63,7 @@
 									 pollution: power plants, fossil fuel consumption (traffic, construction, most forms of transportation), burning of wood, and forest and grass fires. Sources also include, to a lesser extent, smoking, cooking, and burning 
 									 candles.</p>
 								<h2>Executive Summary</h2>
-								<p>Publicly available 2019 EPA monthly averaged data for PM2.5 for the contiguous US, which can be found <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">here</a>, was used as our target variable. We chose to analyze 2019 because this was the last full pre-pandemic year for which data were available 
+								<p>Publicly available 2019 EPA monthly averaged data for PM2.5 for the contiguous US, which can be found <span style="background-color: #70C7AA"><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">here</a></span>, was used as our target variable. We chose to analyze 2019 because this was the last full pre-pandemic year for which data were available 
 									and the pandemic drastically changed global air quality due to lockdowns. Locations of EPA ground monitoring sensors can be seen in the figure below:</p>
 									<style>
 										.imgStyle {
@@ -76,18 +76,18 @@
 										<img src="images/epa_pm25.jpeg" class="imgStyle" />
 										</div>
 								<p>Precipitation has a negative correlation to PM2.5 concentration. Precipitation “washes” the air of particulate matter. On the other hand, temperature has a positive correlation to PM2.5 concentration. Higher temperatures 
-									lead to more reactions within the atmosphere, leading to more particulate matter. Temperature and precipitation data were pulled from <a href="https://giovanni.gsfc.nasa.gov/giovanni/">NASA GIOVANNI</a>, a data acquisition tool 
+									lead to more reactions within the atmosphere, leading to more particulate matter. Temperature and precipitation data were pulled from <span style="background-color: #70C7AA"><a href="https://giovanni.gsfc.nasa.gov/giovanni/">NASA GIOVANNI</a></span>, a data acquisition tool 
 									to collect satellite data. Precipitation data 
 									comes from the Global Precipitation Monitor satellite at a resolution of 0.1 degrees. Temperature data comes from the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument aboard the Aqua satellite at a resolution
 									 of 0.05 degrees.</p>
 
 								<p>NO2 and PM2.5 have similar links to overall health and have similar sources, primarily from the burning of fuel. NO2 forms from emissions from cars, trucks and buses, power plants, and off-road equipment and is equally 
 									dangerous to health, especially asthma in younger people. NO2 data is collected from the TROPOspheric Monitoring Instrument (TROPOMI) instrument aboard the Sentinel 5 at a resolution of 0.1 degrees. This data set was used 
-									in <a href="https://www.pnas.org/doi/abs/10.1073/pnas.2022409118">Kerr et al. 2022</a> and access to the data set can be found <a href="https://gwu.app.box.com/s/8phdj2gtux6gjwzit35skptx8hxl8d9d?">here</a>.</p>
+									in <span style="background-color: #70C7AA"><a href="https://www.pnas.org/doi/abs/10.1073/pnas.2022409118">Kerr et al. 2022</a></span> and access to the data set can be found <span style="background-color: #70C7AA"><a href="https://gwu.app.box.com/s/8phdj2gtux6gjwzit35skptx8hxl8d9d?">here</a></span>.</p>
 									
 								<p>Aerosol optical depth (AOD) is a measure of the amount of dust/haze in the atmosphere and tells us how much direct sunlight is prevented from reaching the ground due to aerosol particles. AOD and PM2.5 have a positive 
 									correlation since PM2.5 is itself an aerosol. AOD data comes from the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument aboard the Aqua satellite. NASA GIOVANNI only offers these data at a resolution of 
-									0.25 degrees. In order to obtain a finer resolution we used a high-resolution gridded data set found in <a href="https://www.mdpi.com/2072-4292/12/17/2847">Gupta et al. 2020</a> which can be found <a href="https://www.nsstc.uah.edu/data/sundar/MODIS_AOD_L3_HRG/AQUA/">here</a>.</p>
+									0.25 degrees. In order to obtain a finer resolution we used a high-resolution gridded data set found in <span style="background-color: #70C7AA"><a href="https://www.mdpi.com/2072-4292/12/17/2847">Gupta et al. 2020</a></span> which can be found <span style="background-color: #70C7AA"><a href="https://www.nsstc.uah.edu/data/sundar/MODIS_AOD_L3_HRG/AQUA/">here</a></span>.</p>
 
 								<p>In order to build our data set for modeling, all spatial data had to be collated based on nearest latitude and longitude points to EPA monitoring site locations. Ultimately, 14,000 data points were created based on monthly values 
 									of PM2.5 monthly averages at EPA ground monitoring sites from 2019. Each spatial data point consists of an EPA PM2.5 ground measurement and the corresponding monthly average of temperature, precipication, NO2, and AOD measurements from satellite data.
