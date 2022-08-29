@@ -45,8 +45,8 @@
 							<section id="content" class="main">
 								<h2>Combatting Air Pollution and Inequality in the US</h2>
 								<p>The project described below was a group project completed with two peers. As the only member of the group with experience in atmospheric modeling, I led the group and speerheaded data collection, cleaning, extraction, and interpretation of modeling results.
-									More detailed information, including code and further analysis, can be found on my <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA">Github</a></span> and slides for a presentation on this project can be found <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA/blob/main/Group%201%20-%20Air%20Quality%20Monitoring%20-%20DSI%20523-1.pdf">here</a></span>.</p>
-								<h2>Introduction</h2>
+									Below is a brief summary of the project. More detailed information, including code and further analysis, can be found on my <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA">Github</a></span> and slides for a presentation on this project can be found <span style="background-color: #70C7AA"><a href="https://github.com/jserigano4/Air-Quality-in-the-USA/blob/main/Group%201%20-%20Air%20Quality%20Monitoring%20-%20DSI%20523-1.pdf">here</a></span>.</p>
+								<h2>Summary</h2>
 								<p>Air quality is highly variable in the US and disproportionately affects communities of color. Particulate matter in the atmosphere with a diameter less than 2.5 microns, known as PM2.5, is typically used as a proxy for 
 									general air quality. PM2.5 is the leading environmental contributor to the global burden of disease. Particles in this size range are so dangerous because they are able to travel deeply into the respiratory tract, reaching 
 									the lungs and affecting lung function as well as exacerbating pre-existing conditions.</p>
@@ -55,123 +55,19 @@
 									This bill would award grants or contracts to state, local, and tribal agencies to install new air quality monitoring systems around communities afflicted by poor air quality. The EPA does not explicitly state where 
 									these monitors should be located and instead delegates the placement of these monitors to the agencies. <b>The goal of this project is to create a model that accurately estimates ground PM2.5 air quality measurements at 
 									current EPA monitoring sites using publicly available satellite data. We will then use this model to determine regions in the US that suffer from poor air quality, noted by highly variable PM2.5 predictions in the region 
-									or PM2.5 predictions greater than the WHO standard, and recommend locations in the US that could benefit from hyperlocal air quality monitoring. </b>The goal of this project is not to determine the placement of hyperlocal 
-									monitors, but instead to determine regions of the US that could benefit from further analysis at higher spatial resolution.</p>
-								<p>Long term exposure to fine particulate matter like PM2.5 causes approximately 8 million excess deaths annually, so developing a model that can understand temporal and spatial variability in air pollution is a crucial
-									 component to combatting air quality inequalities when ground monitoring is not available. In the US, PM2.5 was associated with about 40,000 premature deaths in 2019, an economic cost that translates to about $500 billion USD. 
-									 The health impacts of PM2.5 are not experienced equally in the U.S.: ethnoracial minorities face significantly higher burdens of PM2.5-attributable premature mortality. Sources of PM2.5 include most forms of well-known 
-									 pollution: power plants, fossil fuel consumption (traffic, construction, most forms of transportation), burning of wood, and forest and grass fires. Sources also include, to a lesser extent, smoking, cooking, and burning 
-									 candles.</p>
-								<h2>Executive Summary</h2>
-								<p>Publicly available 2019 EPA monthly averaged data for PM2.5 for the contiguous US, which can be found <span style="background-color: #70C7AA"><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">here</a></span>, was used as our target variable. We chose to analyze 2019 because this was the last full pre-pandemic year for which data were available 
-									and the pandemic drastically changed global air quality due to lockdowns. Locations of EPA ground monitoring sensors can be seen in the figure below:</p>
-									<style>
-										.imgStyle {
-											height: 100%;
-											width: 100%;
-										}
-										</style>
-										<html>
-										<div class="mydiv">
-										<img src="images/epa_pm25.jpeg" class="imgStyle" />
-										</div>
-								<p>Precipitation has a negative correlation to PM2.5 concentration. Precipitation “washes” the air of particulate matter. On the other hand, temperature has a positive correlation to PM2.5 concentration. Higher temperatures 
-									lead to more reactions within the atmosphere, leading to more particulate matter. Temperature and precipitation data were pulled from <span style="background-color: #70C7AA"><a href="https://giovanni.gsfc.nasa.gov/giovanni/">NASA GIOVANNI</a></span>, a data acquisition tool 
-									to collect satellite data. Precipitation data 
-									comes from the Global Precipitation Monitor satellite at a resolution of 0.1 degrees. Temperature data comes from the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument aboard the Aqua satellite at a resolution
-									 of 0.05 degrees.</p>
+									or PM2.5 predictions greater than the WHO standard, and recommend locations in the US that could benefit from hyperlocal air quality monitoring. </b>Long term exposure to fine particulate matter like PM2.5 causes approximately
+									8 million excess deaths annually, so developing a model that can understand temporal and spatial variability in air pollution is a crucial component to combatting air quality inequalities when ground monitoring is not available. </p>
 
-								<p>NO2 and PM2.5 have similar links to overall health and have similar sources, primarily from the burning of fuel. NO2 forms from emissions from cars, trucks and buses, power plants, and off-road equipment and is equally 
-									dangerous to health, especially asthma in younger people. NO2 data is collected from the TROPOspheric Monitoring Instrument (TROPOMI) instrument aboard the Sentinel 5 at a resolution of 0.1 degrees. This data set was used 
-									in <span style="background-color: #70C7AA"><a href="https://www.pnas.org/doi/abs/10.1073/pnas.2022409118">Kerr et al. 2022</a></span> and access to the data set can be found <span style="background-color: #70C7AA"><a href="https://gwu.app.box.com/s/8phdj2gtux6gjwzit35skptx8hxl8d9d?">here</a></span>.</p>
-									
-								<p>Aerosol optical depth (AOD) is a measure of the amount of dust/haze in the atmosphere and tells us how much direct sunlight is prevented from reaching the ground due to aerosol particles. AOD and PM2.5 have a positive 
-									correlation since PM2.5 is itself an aerosol. AOD data comes from the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument aboard the Aqua satellite. NASA GIOVANNI only offers these data at a resolution of 
-									0.25 degrees. In order to obtain a finer resolution we used a high-resolution gridded data set found in <span style="background-color: #70C7AA"><a href="https://www.mdpi.com/2072-4292/12/17/2847">Gupta et al. 2020</a></span> which can be found <span style="background-color: #70C7AA"><a href="https://www.nsstc.uah.edu/data/sundar/MODIS_AOD_L3_HRG/AQUA/">here</a></span>.</p>
+								<p>Publicly available 2019 EPA monthly averaged data for PM2.5 for the contiguous US, which can be found <span style="background-color: #70C7AA"><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">here</a></span>, was used as our target variable. We chose to analyze 2019 because this was the last full pre-pandemic year for which data were available and the pandemic drastically changed global air quality due to lockdowns. The features used in the model included monthly averaged satellite measurements for precipitation rate, surface temperature, pollution from nitrogen dioxide (NO2), and aerosol optical depth. All of these features are directly correlated to PM2.5 pollution and were pulled from various sources using data acquisition tools from NASA and ESA. </p>
+								
+								<p>In order to build our data set for modeling, all spatial data had to be collated based on nearest latitude and longitude points to EPA monitoring site locations. Ultimately, 14,000 data points were created based on PM2.5 monthly average measurements at EPA ground monitoring sites from 2019. Each spatial data point consists of an EPA PM2.5 ground measurement and the corresponding monthly average of temperature, precipitation, NO2, and AOD measurements from satellite data.</p>
 
-								<p>In order to build our data set for modeling, all spatial data had to be collated based on nearest latitude and longitude points to EPA monitoring site locations. Ultimately, 14,000 data points were created based on monthly values 
-									of PM2.5 monthly averages at EPA ground monitoring sites from 2019. Each spatial data point consists of an EPA PM2.5 ground measurement and the corresponding monthly average of temperature, precipication, NO2, and AOD measurements from satellite data.
-								</p>
-
-								<p>We ran various regression models, including simple, stacked, and neural net models. In the end, our best performing model was a simple RandomForestRegressor() model with hyperparameter tuning. Although the end performance was not ideal, 
-									our model was able to account for 94% of variability in the training data set and 71% of variability in the test data set. This suggests that our model is overfit and could perhaps be improved by including additional years of data, 
-								performing additional feature selection, and/or including features with high correlation to air pollution such as population density.</p>
-
-								<p>In order to determine locations in the US where the EPA should focus on further air quality monitoring, 1,000 random latitude and longitude data points across the contiguous United States, collated to the closest data point for each feature, were created in order to run through our model 
-									to predict monthly PM2.5 values. The location of these random data points compared to the EPA monitoring sites can be found below:</p>
-									<style>
-										.imgStyle {
-											height: 100%;
-											width: 100%;
-										}
-										</style>
-										<html>
-										<div class="mydiv">
-										<img src="images/epa_test_locs.jpeg" class="imgStyle" />
-										</div>
-
-								<h2>Conclusions and Recommendations</h2>
-								<p>We analyzed two factors to determine recommendations on where the EPA should place new monitors: Average annual PM 2.5 concentration, and annual PM2.5 variability. A high annual PM 2.5 concentration is indicative of an area with a lot 
-									of pollution and poor air quality year round. High PM 2.5 variability could be anthropogenic, or could be natural. This includes factories which would pollute only when they are active, cities which would pollute more during commuting 
-									hours, and wildfires or other natural causes that create poor air quality.
-
-									A histogram of annual averages for all data points is show below:</p>
-									<style>
-										.imgStyle {
-											height: 100%;
-											width: 100%;
-										}
-										</style>
-										<html>
-										<div class="mydiv">
-										<img src="images/annual_average.png" class="imgStyle" />
-										</div>
-
-								<p>The World Health Organization Air Quality Guidelines (WHO AQG) recommend an annual PM2.5 exposure below 10 &mu;g/m3, which is seen on the figure in a yellow vertical line. Locations above this value have been flagged as recommended sites 
-									for monitoring. The figure below shows these locations in blue, with EPA monitor sites shown in orange:</p>
-									<style>
-										.imgStyle {
-											height: 100%;
-											width: 100%;
-										}
-										</style>
-										<html>
-										<div class="mydiv">
-										<img src="images/rec_highavg.jpeg" class="imgStyle" />
-										</div>
-
-								<p>A histogram of PM2.5 variability for all data points is shown below:
-								</p>
-								<style>
-									.imgStyle {
-										height: 100%;
-										width: 100%;
-									}
-									</style>
-									<html>
-									<div class="mydiv">
-									<img src="images/annual_variability.png" class="imgStyle" />
-									</div>
-
-								<p>In this case, there are no guidelines but there are clear outliers to this data set. We set an arbitrary cutoff of 3 and recommend the sites above this value for EPA PM2.5 ground monitoring. 
-									The figure below shows these locations in blue, with EPA monitor sites shown in orange:</p>
-									<style>
-										.imgStyle {
-											height: 100%;
-											width: 100%;
-										}
-										</style>
-										<html>
-										<div class="mydiv">
-										<img src="images/rec_highvar.jpeg" class="imgStyle" />
-										</div>
-
-								<p>Both recommendation systems produce similar results. We see some recommended sites at the southern tip of Texas and many other sites on the west coast and specifically the Pacific Northwest. 
-									The high PM2.5 and high variability on this coast is most likely due to seasonal wildfires.</p>
-
-								<p>Cleaner input data and more variables would help make predicting ground PM2.5 values from satellite data stronger. The resolution of location data left room for error in the extraction of feature measurements, which could be improved with 
-									higher resolution satellite data. Training and testing variability across multiple years could also improve model performance and give more variability insights to determine causes. Additionally, other variables highly correlated to air pollution
-									such as proximity to industrial areas and population density could improve modelling efforts. </p>
+								<p>Various regression models were created, including simple, stacked, and neural net models. In order to determine locations in the US where the EPA should focus on further air quality monitoring, 1,000 random latitude and longitude data points across the contiguous United States, collated to the closest data point for each feature, were created in order to run through our best performing model to predict monthly ground PM2.5 values from satellite data.</p>
+							
+								<p>We analyzed two factors to determine recommendations on where the EPA should place new monitors: average annual PM 2.5 concentration, and annual PM2.5 variability. A high annual PM 2.5 concentration is indicative of an area with a lot of pollution and poor air quality year round. High PM 2.5 variability could be anthropogenic, or could be natural. This includes factories which would pollute only when they are active, cities which would pollute more during commuting hours, and wildfires or other natural causes that create poor air quality.</p>
+							
+								<p>In the end, we were able to use our model to recommend regions in the contiguous US where communities could benefit from further air quality monitoring from the EPA. Most recommended sites included regions in southern Texas and on the west coast, specifically the Pacific Northwest.</p>
+							
 							</section>
 
 					</div>
